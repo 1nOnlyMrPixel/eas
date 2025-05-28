@@ -1,5 +1,3 @@
-
-//test
 const bigContainer=document.querySelector(".bigContainer");
 const gridSize=+prompt("Enter GridSize");
 for(let i=1;i<=gridSize;i++)
