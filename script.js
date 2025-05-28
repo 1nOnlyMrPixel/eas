@@ -8,7 +8,14 @@ for(let i=1;i<=gridSize;i++)
         {
             const createBatchItems=document.createElement("div");
             createBatchItems.setAttribute("style","border:2px solid black;flex:1");
+            createBatchItems.addEventListener("mouseenter",addPatch);
             createBatch.appendChild(createBatchItems);
         }
         bigContainer.appendChild(createBatch);
 }
+
+function addPatch(e)
+{
+e.target.style.backgroundColor="gray";
+}
+
