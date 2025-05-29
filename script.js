@@ -61,7 +61,7 @@ function setupPixelArea()
     //Set pixels btn functionality
     drawPixelsBtn.addEventListener("click",function()
     {
-    if(Number.isInteger(+inputPixelCount.value) && +inputPixelCount.value>0 && +inputPixelCount.value<=100)
+    if(Number.isInteger(+inputPixelCount.value) && +inputPixelCount.value>1 && +inputPixelCount.value<=100)
     {
         pixelCount=+inputPixelCount.value;
         controls.removeChild(inputPixelCount);
@@ -78,9 +78,9 @@ function setupPixelArea()
         bigContainer.style.display="flex";
         drawCanvas(pixelCount);
     }
-    if(Number.isInteger(+inputPixelCount.value) && +inputPixelCount.value>100)
+    if(Number.isInteger(+inputPixelCount.value) && (+inputPixelCount.value>100 || +inputPixelCount.value<1))
     {
-        inputPixelCount.value="Enter Value Within 0-100";
+        inputPixelCount.value="Enter Value Within 1-100";
         inputPixelCount.style.border="1px solid red";
     }
     });
