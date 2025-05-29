@@ -24,7 +24,7 @@
     align-items: center;
     box-sizing: border-box;
 }
-#setDimensionsBtn
+#setPixelCountBtn
 {
     height: 50px;
     width: 150px;
@@ -35,7 +35,7 @@
     border: 2px solid black;
     background-color: blueviolet;
 }
-#setDimensionsBtn:hover
+#setPixelCountBtn:hover
 {
     background-color: rgb(191, 153, 226);
 }

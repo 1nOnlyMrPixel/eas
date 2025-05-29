@@ -1,9 +1,9 @@
 const controls=document.querySelector(".controls");
-const setDimensionsBtn=document.querySelector("#setDimensionsBtn");
+const setPixelCountBtn=document.querySelector("#setPixelCountBtn");
 const bigContainer=document.querySelector(".bigContainer");
 bigContainer.style.display="none";
 
-setDimensionsBtn.addEventListener("click",setupPixelArea);
+setPixelCountBtn.addEventListener("click",setupPixelArea);
 
 
 
@@ -11,7 +11,7 @@ function setupPixelArea()
 {
     bigContainer.style.display="none";
     removePreviousCanvas();
-    setDimensionsBtn.style.display="none";
+    setPixelCountBtn.style.display="none";
     
     let pixelCount=0;
     const inputPixelCount=document.createElement("input");
@@ -61,7 +61,7 @@ function setupPixelArea()
             justify-content:space-evenly;
             align-items:center;
             `);
-        setDimensionsBtn.style.display="";
+        setPixelCountBtn.style.display="";
         bigContainer.style.display="flex";
         drawCanvas(pixelCount);
     }
