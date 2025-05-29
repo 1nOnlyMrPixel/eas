@@ -17,6 +17,7 @@ function setupPixelArea()
     const inputPixelCount=document.createElement("input");
     inputPixelCount.value="Enter number of Pixels";
     inputPixelCount.style.height="40px";
+    inputPixelCount.style.width="200px";
     inputPixelCount.style.textAlign="center";
 
     const drawPixelsBtn=document.createElement("button");
@@ -34,8 +35,12 @@ function setupPixelArea()
     border: 2px solid black;
     background-color: blueviolet`);
     
+    //clear input pixel area onclick and inform to enter a value to input field if empty
+    inputPixelCount.addEventListener("click",e=>{
+        e.target.value="";
+        e.target.style.border="1px solid #8F8F9D"
+    });
 
-    inputPixelCount.addEventListener("click",e=>e.target.value="");
     inputPixelCount.addEventListener("mouseleave",e=>
         {
             if(inputPixelCount.value==="")
@@ -43,15 +48,20 @@ function setupPixelArea()
         }
     );
 
+
+    //Set pixels btn hover animations
     drawPixelsBtn.addEventListener("mouseenter",()=>{
           drawPixelsBtn.style.backgroundColor="rgb(191, 153, 226)";
     });
     drawPixelsBtn.addEventListener("mouseleave",()=>{
         drawPixelsBtn.style.backgroundColor="blueviolet";
     });
+
+
+    //Set pixels btn functionality
     drawPixelsBtn.addEventListener("click",function()
     {
-    if(Number.isInteger(+inputPixelCount.value) && +inputPixelCount.value>0 )
+    if(Number.isInteger(+inputPixelCount.value) && +inputPixelCount.value>0 && +inputPixelCount.value<=100)
     {
         pixelCount=+inputPixelCount.value;
         controls.removeChild(inputPixelCount);
@@ -67,6 +77,11 @@ function setupPixelArea()
         setPixelCountBtn.style.display="";
         bigContainer.style.display="flex";
         drawCanvas(pixelCount);
+    }
+    if(Number.isInteger(+inputPixelCount.value) && +inputPixelCount.value>100)
+    {
+        inputPixelCount.value="Enter Value Within 0-100";
+        inputPixelCount.style.border="1px solid red";
     }
     });
 
