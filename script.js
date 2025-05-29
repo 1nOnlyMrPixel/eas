@@ -16,6 +16,9 @@ function setupPixelArea()
     let pixelCount=0;
     const inputPixelCount=document.createElement("input");
     inputPixelCount.value="Enter number of Pixels";
+    inputPixelCount.style.height="40px";
+    inputPixelCount.style.textAlign="center";
+
     const drawPixelsBtn=document.createElement("button");
     drawPixelsBtn.textContent="Set Pixels";
 
