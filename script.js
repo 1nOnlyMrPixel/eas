@@ -5,7 +5,7 @@ bigContainer.style.display="none";
 
 setPixelCountBtn.addEventListener("click",setupPixelArea);
 
-
+let mouseDwn=false;
 
 function setupPixelArea()
 {
@@ -118,8 +118,16 @@ function drawCanvas(pixelCount)
             for(let j=1;j<=pixelCount;j++)
                 {
                     const createBatchItems=document.createElement("div");
-                    createBatchItems.setAttribute("style","border:1px solid black;flex:1");
-                    createBatchItems.addEventListener("mouseenter",addPatch);
+                    createBatchItems.setAttribute("style","border:0px solid black;flex:1");
+                    createBatchItems.addEventListener("mousemove",addPatch);
+                    createBatchItems.addEventListener("mousedown",(e)=>{
+                        if(e.button===0)
+                            mouseDwn=true;
+                    });
+                    createBatchItems.addEventListener("mouseup",(e)=>{
+                        if(e.button===0)
+                            mouseDwn=false;
+                    });
                     createBatch.appendChild(createBatchItems);
                 }
                 bigContainer.appendChild(createBatch);
@@ -134,6 +142,7 @@ function removePreviousCanvas()
 
 function addPatch(e)
 {
-e.target.style.backgroundColor="gray";
+if(mouseDwn)
+e.target.style.backgroundColor="black";
 }
 
