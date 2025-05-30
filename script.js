@@ -49,6 +49,9 @@ function setupPixelArea()
     );
 
 
+    
+
+
     //Set pixels btn hover animations
     drawPixelsBtn.addEventListener("mouseenter",()=>{
           drawPixelsBtn.style.backgroundColor="rgb(191, 153, 226)";
@@ -57,34 +60,41 @@ function setupPixelArea()
         drawPixelsBtn.style.backgroundColor="blueviolet";
     });
 
+    let displayPixels=function()
+    {
+        if(Number.isInteger(+inputPixelCount.value) && +inputPixelCount.value>1 && +inputPixelCount.value<=100)
+            {
+                pixelCount=+inputPixelCount.value;
+                controls.removeChild(inputPixelCount);
+                controls.removeChild(drawPixelsBtn);
+                controls.removeAttribute("style",`
+                    display:flex;
+                    height:200px;
+                    flex-direction:column;
+                    justify-content:center;
+                    justify-content:space-evenly;
+                    align-items:center;
+                    `);
+                setPixelCountBtn.style.display="";
+                bigContainer.style.display="flex";
+                drawCanvas(pixelCount);
+            }
+            if(Number.isInteger(+inputPixelCount.value) && (+inputPixelCount.value>100 || +inputPixelCount.value<1))
+            {
+                inputPixelCount.value="Enter Value Within 1-100";
+                inputPixelCount.style.border="1px solid red";
+            }
+    }
 
     //Set pixels btn functionality
-    drawPixelsBtn.addEventListener("click",function()
-    {
-    if(Number.isInteger(+inputPixelCount.value) && +inputPixelCount.value>1 && +inputPixelCount.value<=100)
-    {
-        pixelCount=+inputPixelCount.value;
-        controls.removeChild(inputPixelCount);
-        controls.removeChild(drawPixelsBtn);
-        controls.removeAttribute("style",`
-            display:flex;
-            height:200px;
-            flex-direction:column;
-            justify-content:center;
-            justify-content:space-evenly;
-            align-items:center;
-            `);
-        setPixelCountBtn.style.display="";
-        bigContainer.style.display="flex";
-        drawCanvas(pixelCount);
-    }
-    if(Number.isInteger(+inputPixelCount.value) && (+inputPixelCount.value>100 || +inputPixelCount.value<1))
-    {
-        inputPixelCount.value="Enter Value Within 1-100";
-        inputPixelCount.style.border="1px solid red";
-    }
-    });
+    drawPixelsBtn.addEventListener("click",displayPixels);
 
+
+    //Submit pixel clount value on enter keypress
+    inputPixelCount.addEventListener("keydown",(e)=>{
+        if(e.key==="Enter")
+        displayPixels();
+    });
     
     controls.setAttribute("style",`
         display:flex;
