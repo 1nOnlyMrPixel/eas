@@ -5,7 +5,7 @@ bigContainer.style.display="none";
 
 setPixelCountBtn.addEventListener("click",setupPixelArea);
 
-let mouseDwn=false;
+let mouseDwn=false,mouseMid=false;
 
 function setupPixelArea()
 {
@@ -123,10 +123,14 @@ function drawCanvas(pixelCount)
                     createBatchItems.addEventListener("mousedown",(e)=>{
                         if(e.button===0)
                             mouseDwn=true;
+                        if(e.button===1)
+                            mouseMid=true;
                     });
                     createBatchItems.addEventListener("mouseup",(e)=>{
                         if(e.button===0)
                             mouseDwn=false;
+                        if(e.button===1)
+                            mouseMid=false;
                     });
                     createBatch.appendChild(createBatchItems);
                 }
@@ -144,5 +148,7 @@ function addPatch(e)
 {
 if(mouseDwn)
 e.target.style.backgroundColor="black";
+if(mouseMid)
+e.target.style.backgroundColor="white";
 }
 
