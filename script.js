@@ -6,7 +6,7 @@ bigContainer.style.display="none";
 setPixelCountBtn.addEventListener("click",setupPixelArea);
 
 let mouseDwn=false,mouseMid=false;
-
+let setRandomColor=false,setGrayColor=false;
 function setupPixelArea()
 {
     bigContainer.style.display="none";
@@ -137,6 +137,17 @@ function drawCanvas(pixelCount)
                 bigContainer.appendChild(createBatch);
             }
 }
+
+
+function randomColorGenerator()
+{
+    let r=Math.floor(Math.random() * 255);
+    let g=Math.floor(Math.random() * 255);
+    let b=Math.floor(Math.random() * 255);
+    let colorValue=`rgb(${r},${g},${b})`;
+    return colorValue;
+}
+
 function removePreviousCanvas()
 {
     const divs=bigContainer.childNodes;
@@ -146,9 +157,21 @@ function removePreviousCanvas()
 
 function addPatch(e)
 {
-if(mouseDwn)
-e.target.style.backgroundColor="black";
+    //Set colors based on user demands (setRandomColor val or setGrayColor val)
+    let backgroundColor;
+    if(setRandomColor)
+        backgroundColor=randomColorGenerator();
+    else if(setGrayColor)
+        backgroundColor="gray";
+    else
+        backgroundColor="black";
+
+if(mouseDwn &&  e.target.style.backgroundColor===""){   //to color the background only if its not coloured
+    console.log( e.target.style.backgroundColor);
+    e.target.style.backgroundColor=backgroundColor;
+}
+//To use it as an eraser on mid mouse btn drag
 if(mouseMid)
-e.target.style.backgroundColor="white";
+e.target.style.backgroundColor="";
 }
 
