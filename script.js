@@ -73,7 +73,7 @@ function setupPixelArea()
         //display clear button on submit of pixel value
         clearCanvasBtn.style.display="";
 
-        if(Number.isInteger(+inputPixelCount.value) && +inputPixelCount.value>1 && +inputPixelCount.value<=100)
+        if(Number.isInteger(+inputPixelCount.value) && +inputPixelCount.value>=1 && +inputPixelCount.value<=100)
             {
                 pixelCount=+inputPixelCount.value;
                 controls.removeChild(inputPixelCount);
