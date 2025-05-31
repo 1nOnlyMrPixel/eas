@@ -71,10 +71,10 @@ function setupPixelArea()
     let displayPixels=function()
     {
         //display clear button on submit of pixel value
-        clearCanvasBtn.style.display="";
-
+        
         if(Number.isInteger(+inputPixelCount.value) && +inputPixelCount.value>=1 && +inputPixelCount.value<=100)
             {
+                
                 pixelCount=+inputPixelCount.value;
                 controls.removeChild(inputPixelCount);
                 controls.removeChild(drawPixelsBtn);
@@ -121,7 +121,7 @@ function setupPixelArea()
 
 
 function drawCanvas(pixelCount)
-{
+{   clearCanvasBtn.style.display="";
     canvasEnable=true;
     for(let i=1;i<=pixelCount;i++)
         {
