@@ -1,15 +1,22 @@
 const controls=document.querySelector(".controls");
 const setPixelCountBtn=document.querySelector("#setPixelCountBtn");
 const bigContainer=document.querySelector(".bigContainer");
+const clearCanvasBtn=document.querySelector("#clearCanvasBtn");
 bigContainer.style.display="none";
-
+clearCanvasBtn.style.display="none";
 setPixelCountBtn.addEventListener("click",setupPixelArea);
+clearCanvasBtn.addEventListener("click",clearCanvas);
 
+let canvasEnable=false;
 let mouseDwn=false,mouseMid=false;
 let setRandomColor=false,setGrayColor=false;
 let intensityMode=false;
+
+
 function setupPixelArea()
 {
+    canvasEnable=false;
+    clearCanvasBtn.style.display="none";
     bigContainer.style.display="none";
     removePreviousCanvas();
     setPixelCountBtn.style.display="none";
@@ -63,6 +70,9 @@ function setupPixelArea()
 
     let displayPixels=function()
     {
+        //display clear button on submit of pixel value
+        clearCanvasBtn.style.display="";
+
         if(Number.isInteger(+inputPixelCount.value) && +inputPixelCount.value>1 && +inputPixelCount.value<=100)
             {
                 pixelCount=+inputPixelCount.value;
@@ -112,6 +122,7 @@ function setupPixelArea()
 
 function drawCanvas(pixelCount)
 {
+    canvasEnable=true;
     for(let i=1;i<=pixelCount;i++)
         {
             const createBatch=document.createElement("div");
@@ -167,6 +178,17 @@ function setPixelOpacity(e)
             elementOpacity+=0.08;
             e.target.style.opacity=elementOpacity;
         }
+}
+
+function clearCanvas()
+{
+    if(canvasEnable)
+    {
+        const eachPixel=document.querySelectorAll(".bigContainer div");
+        eachPixel.forEach((pixel)=>{
+            pixel.style.backgroundColor="";
+        });
+    }
 }
 
 
