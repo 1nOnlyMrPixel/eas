@@ -2,20 +2,80 @@ const controls=document.querySelector(".controls");
 const setPixelCountBtn=document.querySelector("#setPixelCountBtn");
 const bigContainer=document.querySelector(".bigContainer");
 const clearCanvasBtn=document.querySelector("#clearCanvasBtn");
+const setRandomColorBtn=document.querySelector("#setRandomColorBtn");
+const setIntensitymodeBtn=document.querySelector("#setIntensitymodeBtn");
+const colorPickerBtn=document.querySelector("#colorPicker");
+const colorBox=document.querySelector(".colorBox");
+
+colorPicker.style.display="none";
+setIntensitymodeBtn.style.display="none";
+setRandomColorBtn.style.display="none";
 bigContainer.style.display="none";
 clearCanvasBtn.style.display="none";
+colorPickerBtn.style.backgroundColor="rgb(43, 101, 226)";
 setPixelCountBtn.addEventListener("click",setupPixelArea);
 clearCanvasBtn.addEventListener("click",clearCanvas);
 
+
+setRandomColorBtn.addEventListener("click",()=>{
+     if(setRandomColor===false)
+        {
+            setRandomColor=true;
+            customColor=false;
+            colorPickerBtn.style.backgroundColor="blueviolet";
+            setRandomColorBtn.style.backgroundColor=" rgb(43, 101, 226)";
+        }
+        else if(setRandomColor!==false)
+            {
+                setRandomColor=false;
+                setRandomColorBtn.style.backgroundColor="blueviolet";
+            }
+        });
+setIntensitymodeBtn.addEventListener("click",()=>
+    {
+        if(intensityMode===false)
+        {
+            intensityMode=true;
+            setIntensitymodeBtn.style.backgroundColor=" rgb(43, 101, 226)";
+        }
+        else if(intensityMode!==false)
+        {
+            intensityMode=false;
+            setIntensitymodeBtn.style.backgroundColor="blueviolet";
+        }
+    });
+    colorPickerBtn.addEventListener("click",(e)=>
+        {
+            console.log(e.target.id);
+            if(e.target.id==="colorPicker")
+                {
+                if(customColor===false)
+                    {
+                        customColor=true;
+                        setRandomColor=false;
+                        setRandomColorBtn.style.backgroundColor="blueviolet";
+                        colorPickerBtn.style.backgroundColor=" rgb(43, 101, 226)";
+                    }
+                    else if(customColor!==false)
+                        {
+                            customColor=false;
+                            colorPickerBtn.style.backgroundColor="blueviolet";
+                        }
+                    }
+        });
+
 let canvasEnable=false;
 let mouseDwn=false,mouseMid=false;
-let setRandomColor=false,setGrayColor=false;
+let setRandomColor=false;
 let intensityMode=false;
-
+let customColor=true;
 
 function setupPixelArea()
 {
     canvasEnable=false;
+    colorPicker.style.display="none";
+    setIntensitymodeBtn.style.display="none";
+    setRandomColorBtn.style.display="none";
     clearCanvasBtn.style.display="none";
     bigContainer.style.display="none";
     removePreviousCanvas();
@@ -121,7 +181,12 @@ function setupPixelArea()
 
 
 function drawCanvas(pixelCount)
-{   clearCanvasBtn.style.display="";
+{   
+    colorPicker.style.display="";
+    clearCanvasBtn.style.display="";
+    setIntensitymodeBtn.style.display="";
+    setRandomColorBtn.style.display="";
+
     canvasEnable=true;
     for(let i=1;i<=pixelCount;i++)
         {
@@ -204,12 +269,12 @@ function addPatch(e)
     let backgroundColor;
     if(setRandomColor)
         backgroundColor=randomColorGenerator();
-    else if(setGrayColor)
-        backgroundColor="gray";
-    else
+    else if(customColor)
+        backgroundColor=colorBox.value;
+    else 
         backgroundColor="black";
 
-if(mouseDwn &&  e.target.style.backgroundColor===""){   //to color the background only if its not coloured
+if(mouseDwn){   //to color the background only if its not coloured &&  e.target.style.backgroundColor===""
     e.target.style.backgroundColor=backgroundColor;
 }
 //To use it as an eraser on mid mouse btn drag
