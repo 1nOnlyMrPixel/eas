@@ -7,6 +7,7 @@ setPixelCountBtn.addEventListener("click",setupPixelArea);
 
 let mouseDwn=false,mouseMid=false;
 let setRandomColor=false,setGrayColor=false;
+let intensityMode=false;
 function setupPixelArea()
 {
     bigContainer.style.display="none";
@@ -155,8 +156,28 @@ function removePreviousCanvas()
     Array.from(divs).forEach((element)=>bigContainer.removeChild(element));
 }
 
+
+function setPixelOpacity(e)
+{
+    if(e.target.style.backgroundColor==="")
+        e.target.style.opacity="0.2";
+    else
+        {
+            let elementOpacity=+getComputedStyle(e.target).getPropertyValue("opacity");
+            elementOpacity+=0.08;
+            e.target.style.opacity=elementOpacity;
+        }
+}
+
+
+
 function addPatch(e)
 {
+    //checks if intensity mode active or not and sets element opacity based on that
+    if(intensityMode)
+        setPixelOpacity(e);
+    else
+        e.target.style.opacity="1.0";
     //Set colors based on user demands (setRandomColor val or setGrayColor val)
     let backgroundColor;
     if(setRandomColor)
@@ -167,7 +188,6 @@ function addPatch(e)
         backgroundColor="black";
 
 if(mouseDwn &&  e.target.style.backgroundColor===""){   //to color the background only if its not coloured
-    console.log( e.target.style.backgroundColor);
     e.target.style.backgroundColor=backgroundColor;
 }
 //To use it as an eraser on mid mouse btn drag
