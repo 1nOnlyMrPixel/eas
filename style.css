@@ -59,3 +59,14 @@
 {   
     border: 1px solid black;
 }
+.title
+{
+    height: 45px    ;
+    background-color: rgb(2, 2, 15);
+    color:white;
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
